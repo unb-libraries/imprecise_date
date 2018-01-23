@@ -2,3 +2,6 @@ name: Imprecise Date
 type: module
 description: Store display, and sort imprecise dates.
 core: 8.x
+
+dependencies:
+  - drupal:datetime_range

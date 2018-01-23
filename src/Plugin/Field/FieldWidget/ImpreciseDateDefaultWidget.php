@@ -83,15 +83,6 @@ class ImpreciseDateDefaultWidget extends ImpreciseDateBaseWidget implements Cont
         '#date_time_callbacks' => [],
       ];
 
-      $element['mean_value'] += [
-        '#date_date_format' => $date_format,
-        '#date_date_element' => $date_type,
-        '#date_date_callbacks' => [],
-        '#date_time_format' => $time_format,
-        '#date_time_element' => $time_type,
-        '#date_time_callbacks' => [],
-      ];
-
       return $element;
     }
 

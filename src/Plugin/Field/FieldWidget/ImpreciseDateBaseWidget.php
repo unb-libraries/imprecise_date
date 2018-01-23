@@ -18,9 +18,26 @@ class ImpreciseDateBaseWidget extends DateRangeWidgetBase {
   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
     $element = parent::formElement($items, $delta, $element, $form, $form_state);
 
-    $element['mean_value'] = [
-      '#title' => $this->t('Mean date'),
-    ] + $element['value'];
+    $element['date_imprecise_chk'] = [
+      '#type' => 'checkbox',
+      '#title' => 'Date Is Imprecise',
+    ];
+
+    $element['end_value']['#states'] = [
+      'visible' => [
+        ':input[name="date_imprecise_chk"]' => array('checked' => TRUE),
+      ],
+    ];
+
+    $element['date_imprecise_chk2'] = [
+      '#type' => 'textfield',
+      '#title' => 'Date Is Imprecise',
+      '#states' => [
+        'visible' => [
+          ':input[name="date_imprecise_chk"]' => array('checked' => TRUE),
+        ],
+      ]
+    ];
 
     if ($items[$delta]->mean_date) {
       /** @var \Drupal\Core\Datetime\DrupalDateTime $mean_date */

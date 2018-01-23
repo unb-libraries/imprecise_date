@@ -22,7 +22,7 @@ use Drupal\datetime_range\Plugin\Field\FieldWidget\DateRangeDefaultWidget;
  *   }
  * )
  */
-class ImpreciseDateDefaultWidget extends DateRangeDefaultWidget implements ContainerFactoryPluginInterface {
+class ImpreciseDateDefaultWidget extends ImpreciseDateBaseWidget implements ContainerFactoryPluginInterface {
 
   /**
      * The date format storage.
@@ -36,6 +36,8 @@ class ImpreciseDateDefaultWidget extends DateRangeDefaultWidget implements Conta
      */
     public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, array $third_party_settings, EntityStorageInterface $date_storage) {
       parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings, $date_storage);
+
+      $this->dateStorage = $date_storage;
     }
 
     /**

@@ -48,27 +48,7 @@ class ImpreciseDateItem extends DateRangeItem {
     * {@inheritdoc}
     */
    public static function propertyDefinitions(FieldStorageDefinitionInterface $field_definition) {
-     $properties['value'] = DataDefinition::create('datetime_iso8601')
-       ->setLabel(t('Start date value'))
-       ->setRequired(TRUE);
-
-     $properties['start_date'] = DataDefinition::create('any')
-       ->setLabel(t('Computed start date'))
-       ->setDescription(t('The computed start DateTime object.'))
-       ->setComputed(TRUE)
-       ->setClass(DateTimeComputed::class)
-       ->setSetting('date source', 'value');
-
-     $properties['end_value'] = DataDefinition::create('datetime_iso8601')
-       ->setLabel(t('End date value'))
-       ->setRequired(TRUE);
-
-     $properties['end_date'] = DataDefinition::create('any')
-       ->setLabel(t('Computed end date'))
-       ->setDescription(t('The computed end DateTime object.'))
-       ->setComputed(TRUE)
-       ->setClass(DateTimeComputed::class)
-       ->setSetting('date source', 'end_value');
+     $properties = parent::propertyDefinitions($field_definition);
 
      $properties['mean_value'] = DataDefinition::create('datetime_iso8601')
        ->setLabel(t('Mean date value'))
@@ -89,13 +69,7 @@ class ImpreciseDateItem extends DateRangeItem {
     */
    public function onChange($property_name, $notify = TRUE) {
      // Enforce that the computed date is recalculated.
-     if ($property_name == 'value') {
-       $this->start_date = NULL;
-     }
-     elseif ($property_name == 'end_value') {
-       $this->end_date = NULL;
-     }
-     elseif ($property_name == 'mean_value') {
+     if ($property_name == 'mean_value') {
        $this->mean_date = NULL;
      }
      parent::onChange($property_name, $notify);
